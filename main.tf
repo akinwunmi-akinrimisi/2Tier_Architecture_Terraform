@@ -306,7 +306,7 @@ resource "aws_lb_target_group" "project-launch-template" {
     protocol            = "HTTP"
     timeout             = 10
     unhealthy_threshold = 5
-    path                = "/"
+    path                = "/index.html"
     matcher             = "200"
   }
 
