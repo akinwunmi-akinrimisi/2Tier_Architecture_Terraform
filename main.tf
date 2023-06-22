@@ -319,7 +319,7 @@ resource "aws_launch_template" "project-webserver" {
   image_id               = data.aws_ssm_parameter.instance_ami.value
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.project-webserver-sg.id]
-  associate_public_ip_address = true
+  
 
   tag_specifications {
     resource_type = "instance"
