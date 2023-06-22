@@ -1,9 +1,9 @@
-/* terraform {
+terraform {
   cloud {
     organization = "akinwunmi_akinrimisi"
 
     workspaces {
-      name = ""
+      name = "2Tier_Architecture_Terraform"
     }
   }
-} */
+}
