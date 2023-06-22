@@ -195,8 +195,8 @@ resource "aws_security_group" "project-webserver-sg" {
   }
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -319,6 +319,7 @@ resource "aws_launch_template" "project-webserver" {
   image_id               = data.aws_ssm_parameter.instance_ami.value
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.project-webserver-sg.id]
+  associate_public_ip_address = true
 
   tag_specifications {
     resource_type = "instance"
@@ -335,7 +336,7 @@ resource "aws_autoscaling_group" "project-asg" {
   desired_capacity    = 2
   max_size            = 5
   min_size            = 2
-  vpc_zone_identifier = [aws_subnet.project-private1.id, aws_subnet.project-private2.id]
+  vpc_zone_identifier = [aws_subnet.project-public1.id, aws_subnet.project-public2.id]
 
   lifecycle {
     ignore_changes = [load_balancers, target_group_arns]
